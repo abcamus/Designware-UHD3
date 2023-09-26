@@ -12,7 +12,7 @@ __weak void usb_phy_power(int on)
 	return;
 }
 
-static int artosyn_xhci_core_init(struct arto_xhci *arto)
+static int vendor_xhci_core_init(struct arto_xhci *arto)
 {
 	int ret = 0;
 
@@ -59,8 +59,8 @@ printf("Use Unix Environment.\n");
 	}
 #endif
 
-	debug("artosyn xhci core init.\n");
-	ret = artosyn_xhci_core_init(ctx);
+	debug("vendor xhci core init.\n");
+	ret = vendor_xhci_core_init(ctx);
 #ifdef EMBEDDED_PORT
 	if (ret < 0) {
 		//TODO: specify puts method

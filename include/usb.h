@@ -7,6 +7,7 @@
 #include <dwc3.h>
 #include <memalign.h>
 #include <usb_defs.h>
+#include <compiler.h>
 
 #define DIV_ROUND_UP(n,d) (((n) + (d) - 1) / (d))
 
