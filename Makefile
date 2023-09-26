@@ -14,25 +14,25 @@ PREFIX := aarch64-linux-gnu-
 CC := $(PREFIX)gcc
 CFLAGS += -O0
 
-OBJS := $(SRC_C:%.c=%.o)
-#LINK_OBJS := $(addprefix $(BUILD)/, $(patsubst %.c, %.o, $(notdir $(SRC_C))))
-#$(warning $(notdir $(OBJS)))
+OBJS := $(SRC_C:%.c=$(BUILD)/%.o)
+#$(warning $(OBJS))
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	@$(CC) $(CFLAGS) -o $@ $(INCLUDE) $(addprefix $(BUILD)/, $(notdir $(OBJS)))
+	@$(CC) $(CFLAGS) -o $@ $(INCLUDE) $^
 
-%.o:%.c |$(BUILD)
+$(BUILD)/%.o:%.c |$(BUILD)
+	@echo "Compiling $<"
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $(INCLUDE) $^ -o $@
-	@mv $@ $(BUILD)
 
 $(BUILD):
 	mkdir $(BUILD)
 
 .PHONY: clean, distclean, pack
 clean:
-	@rm -rf $(BUILD)/*.o $(TARGET) log
+	@rm -rf $(BUILD)/* $(TARGET) log
 
 distclean:
 	@rm -rf $(BUILD) $(TARGET) $(TARGET).tar.bz2 log tags
