@@ -10,7 +10,7 @@ SRC_C := usb.c \
 	usb_storage.c
 TARGET := dwc3
 BUILD := build
-PREFIX := arm-none-linux-gnueabi-
+PREFIX := aarch64-linux-gnu-
 CC := $(PREFIX)gcc
 CFLAGS += -O0
 
